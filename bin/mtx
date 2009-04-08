@@ -2,7 +2,7 @@
 
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr'))
 
-uri_options, execution_options = MinglrOptionsParser.parse(ARGV, :card, :transition)
+uri_options, execution_options = MtxOptionsParser.parse(ARGV, :card, :transition)
 
 MingleResource.configure uri_options
 

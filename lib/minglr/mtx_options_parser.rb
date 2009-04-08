@@ -1,4 +1,4 @@
-class MinglrOptionsParser
+class MtxOptionsParser
   def self.parse(args, *required_by_command)
     uri_options = {}
     command_options = {}
