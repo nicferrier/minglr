@@ -8,16 +8,14 @@ uri_options = rc_config[:global] || {}
 project = rc_config[:global][:default].to_sym if rc_config[:global][:default]
 original_arguments = ARGV
 
-# extra_options = MinglrOptionsParser.parse(original_arguments)
 if MinglrAction::ACTIONS.include?(ARGV[0])
-  action = ARGV.shift
+  action = ARGV[0]
 else
   if ARGV[0] && (ARGV[0] =~ /^--/).nil?
-    project = ARGV.shift.to_sym 
-    action = ARGV.shift if ARGV[0]
+    project = ARGV[0].to_sym 
+    action = ARGV[1]
   end
 end
-
 
 if project
   uri_options.merge! rc_config[project]
@@ -25,7 +23,6 @@ if project
   uri_options[:host_and_port], uri_options[:project] = uri_options[:url].split("/projects/")
   MingleResource.configure uri_options
   Attachment.configure
-  # Parse again once we've loaded the project
   extra_options = MinglrOptionsParser.parse(original_arguments)
   MinglrAction.execute(action, ARGV, extra_options, rc_config[project])
 end

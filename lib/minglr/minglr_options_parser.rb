@@ -14,23 +14,23 @@ class MinglrOptionsParser
       opts.separator ""
       opts.separator "Valid Commands Are: #{MinglrAction::ACTIONS.join(", ")}"
       
-      opts.on("-n", String, "Short name of card") do |card_name|
+      opts.on("-n NAME", String, "Short name of card") do |card_name|
         command_options[:name] = card_name
       end
       
-      opts.on("-d", String, "Description of card") do |card_description|
+      opts.on("-d DESCRIPTION", String, "Description of card") do |card_description|
         command_options[:description] = card_description
       end
       
-      opts.on("-t", String, "Type of card") do |card_type|
+      opts.on("-t TYPE", String, "Type of card") do |card_type|
         command_options[:card_type_name] = card_type
       end
       
-      opts.on("-c", String, "Comment") do |comment|
+      opts.on("-c COMMENT", String, "Comment") do |comment|
         command_options[:comment] = comment
       end
       
-      opts.on("-f", String, "File to attach") do |file|
+      opts.on("-f FILE", String, "File to attach") do |file|
         command_options[:file_attachment] = file
       end
       

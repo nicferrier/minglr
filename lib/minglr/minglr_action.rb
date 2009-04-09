@@ -10,6 +10,11 @@ class MinglrAction
   
   def initialize(action, options, flag_options, config)
     @action = action
+    if action == options[0].to_sym
+      options.shift
+    else
+      options.shift; options.shift
+    end
     @options = options
     @flag_options = flag_options
     @config = config
@@ -21,7 +26,7 @@ class MinglrAction
   end
   
   def cards
-    attributes = [:number, :card_type_name, :cp_story_status, :name]
+    attributes = [:number, :card_type_name, @config[:status_property].to_sym, :name]
     cards = Card.find(:all)
     cards = filter_collection(cards, attributes, @options)
     print_collection(cards, attributes)
@@ -36,7 +41,7 @@ class MinglrAction
 
   def card
     card_number = @options.first
-    attributes = [:number, :card_type_name, :cp_story_status, :name, :description]
+    attributes = [:number, :card_type_name, @config[:status_property].to_sym, :name, :description]
     card = card_by_number(card_number)
     attachments = Attachment.find(:all, :params => { :card_number => card_number })
     attachments = attachments.collect do |attachment|
@@ -46,7 +51,7 @@ class MinglrAction
      Number: #{card.number}
        Name: #{card.name}
        Type: #{card.card_type_name}
-     Status: #{card.cp_story_status}
+     Status: #{card.send(@config[:status_property].to_sym)}
 Description: #{card.description}
 
 Attachments:
@@ -56,37 +61,45 @@ Attachments:
   end
   
   def attach
-    puts "File uploading via API is broken in Mingle"
-    # card_number = @options.first
-    # if card_to_update = card_by_number(card_number)
-    #   url = Attachment.site
-    #   url = (url.to_s.gsub(/#{url.path}$/, '')) + Attachment.collection_path(:card_number => card_number)
-    #   file_name = @flag_options[:file_attachment]
-    #   require 'httpclient'
-    #   File.open(file_name) do |file|
-    #     p file
-    #     body = { 'file' => file, "filename" => file_name }
-    #     res = HTTPClient.post(url, body)
-    #     p res.status_code
-    #   end
-    # end
+    card_number = @options.first
+    if card_to_update = card_by_number(card_number)
+      url = Attachment.site
+      url = (url.to_s.gsub(/#{url.path}$/, '')) + Attachment.collection_path(:card_number => card_number)
+      file_name = @flag_options[:file_attachment]
+      require 'httpclient'
+      if File.exist?(file_name)
+        File.open(file_name) do |file|
+          body = { 'file' => file, "filename" => file_name }
+          client = HTTPClient.new
+          client.set_auth(nil, @config[:username], @config[:password])
+          res = client.post(url, body)
+          if res.status_code == 201
+            puts "File '#{file_name}' attached to card #{card_number}"
+          else
+            puts "Error attaching file '#{file_name}' to card #{card_number} (Got back HTTP code #{res.status_code})"
+          end
+        end
+      else
+        puts "Unable to open file '#{file_name}'"
+      end
+    end
   end
   
   def fetch
     card_number = @options.first
     if card_to_update = card_by_number(card_number)
       attachments = Attachment.find(:all, :params => { :card_number => card_number })
-      url = MingleResource.site
-      p url
-      p url.host
-      # attachments.each do |attachment|
-      #   `curl #{MingleResource.site + attachment.url}`
-      # end
+      attachments.each do |attachment|
+        url = MingleResource.site + attachment.url
+        url.userinfo = nil, nil
+        puts "Downloading #{url.to_s}:"
+        `curl --insecure --progress-bar --output #{attachment.file_name} --user #{@config[:username]}:#{@config[:password]} #{url}`
+      end
     end
   end
   
   def create
-    @flag_options.merge!({ :cp_story_status => "New", :cp_owner_user_id => owner_id })
+    @flag_options.merge!({ @config[:status_property].to_sym => "New", :cp_owner_user_id => owner_id })
     card = Card.new(@flag_options)
     card.save
     card.reload
