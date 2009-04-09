@@ -4,9 +4,40 @@
 
 == DESCRIPTION:
 
-* This gem provides an executable binary to execute a transition on Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management) through its API. It also has sample interactive Rake task on how to facilitate easy card movements when a card enters/exits the development queue.
+* This gem provides two executable binaries to interact with Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management) through its API. It also has sample interactive Rake task on how to facilitate easy card movements when a card enters/exits the development queue.
 
-== FEATURES:
+* mtx is a binary that facilities transition changes for use on rake tasks
+* minglr is a more interactive tool that provides a quick interface for many common uses
+
+== MINGLR FEATURES:
+* lists cards
+	$ minglr cards
+	266 - Task   - Development Complete  - Investigate new tool
+	265 - Defect - New                   - The background is the wrong color
+
+* list users
+	$ minglr users
+	schubert - Michael Schubert - michael@yourcompany.com
+
+* list all cards with the word "foo"
+	$ minglr cards foo
+
+* list details for card 215
+	$ minglr card 215
+	     Number: 215
+	       Name: Add the frobble to the bobble
+	       Type: Story
+	     Status: In Development
+	Description: Lorem Ipsum
+
+* create new story card
+	$ minglr create -t Story -n "My New Story" -d "Story Description"
+
+* move card based on defined transitions
+	$ minglr move 266 -c "All done with development"
+	Moved card from In Development to Dev Complete
+
+== MTX FEATURES:
 
 * Executes a card transition through the Mingle API.
 * Caches user-entered information during Rake task execution.
