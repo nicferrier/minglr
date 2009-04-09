@@ -1,6 +1,6 @@
 class MinglrAction
   
-  ACTIONS = ["cards", "card", "create", "update", "move", "pickup", "users"].sort!
+  ACTIONS = ["cards", "card", "create", "update", "move", "users"].sort!
   
   def self.execute(action, options = [], flag_options = {}, config = {})
     MinglrAction.new(action.to_sym, options, flag_options, config)

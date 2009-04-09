@@ -32,6 +32,17 @@
 
 * create new story card
 	$ minglr create -t Story -n "My New Story" -d "Story Description"
+	Created story card 271
+
+* update a card
+	$ minglr update 271 -d "Bettter Description"
+	Card 271 updated
+
+	     Number: 271
+	       Name: Add the frobble to the bobble
+	       Type: Task
+	     Status: Ready for Development
+	Description: Better Description
 
 * move card based on defined transitions
 	$ minglr move 266 -c "All done with development"
