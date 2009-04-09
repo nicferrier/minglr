@@ -1,0 +1,2 @@
+class PropertyDefinition < MingleResource
+end

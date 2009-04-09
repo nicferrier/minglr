@@ -1,6 +1,6 @@
 class MinglrAction
   
-  ACTIONS = ["cards", "card", "create", "update", "move", "users"].sort!
+  ACTIONS = ["cards", "card", "create", "update", "move", "users", "attach", "fetch"].sort!
   
   def self.execute(action, options = [], flag_options = {}, config = {})
     MinglrAction.new(action.to_sym, options, flag_options, config)
@@ -38,14 +38,51 @@ class MinglrAction
     card_number = @options.first
     attributes = [:number, :card_type_name, :cp_story_status, :name, :description]
     card = card_by_number(card_number)
+    attachments = Attachment.find(:all, :params => { :card_number => card_number })
+    attachments = attachments.collect do |attachment|
+      "* #{attachment.file_name}: #{MingleResource.site + attachment.url}"
+    end
     output = <<-EOS
      Number: #{card.number}
        Name: #{card.name}
        Type: #{card.card_type_name}
      Status: #{card.cp_story_status}
 Description: #{card.description}
+
+Attachments:
+  #{attachments.join("\n")}
     EOS
     puts output
+  end
+  
+  def attach
+    puts "File uploading via API is broken in Mingle"
+    # card_number = @options.first
+    # if card_to_update = card_by_number(card_number)
+    #   url = Attachment.site
+    #   url = (url.to_s.gsub(/#{url.path}$/, '')) + Attachment.collection_path(:card_number => card_number)
+    #   file_name = @flag_options[:file_attachment]
+    #   require 'httpclient'
+    #   File.open(file_name) do |file|
+    #     p file
+    #     body = { 'file' => file, "filename" => file_name }
+    #     res = HTTPClient.post(url, body)
+    #     p res.status_code
+    #   end
+    # end
+  end
+  
+  def fetch
+    card_number = @options.first
+    if card_to_update = card_by_number(card_number)
+      attachments = Attachment.find(:all, :params => { :card_number => card_number })
+      url = MingleResource.site
+      p url
+      p url.host
+      # attachments.each do |attachment|
+      #   `curl #{MingleResource.site + attachment.url}`
+      # end
+    end
   end
   
   def create
