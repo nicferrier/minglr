@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr', "minglr_action"))
+
+rc_config = MinglrConfigParser.parse
+uri_options = rc_config[:global] || {}
+
+extra_options = MinglrOptionsParser.parse(ARGV)
+if MinglrAction::ACTIONS.include?(ARGV[0])
+  action = ARGV.shift
+  project = rc_config[:global][:default].to_sym
+else
+  project = ARGV.shift.to_sym if ARGV[0]
+  action = ARGV.shift
+end
+
+if project && action
+  uri_options.merge! rc_config[project]
+  uri_options[:url].gsub!(/^http\:\/\//, "")
+  uri_options[:host_and_port], uri_options[:project] = uri_options[:url].split("/projects/")
+  MingleResource.configure uri_options
+  MinglrAction.execute(action, ARGV, extra_options, rc_config[project])
+end

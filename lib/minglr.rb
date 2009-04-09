@@ -4,8 +4,11 @@ require 'activeresource'
 require 'optparse'
 
 require File.dirname(__FILE__) + '/minglr/mingle_resource'
+require File.dirname(__FILE__) + '/minglr/mtx_options_parser'
 require File.dirname(__FILE__) + '/minglr/minglr_options_parser'
+require File.dirname(__FILE__) + '/minglr/minglr_config_parser'
 require File.dirname(__FILE__) + '/minglr/card'
+require File.dirname(__FILE__) + '/minglr/user'
 require File.dirname(__FILE__) + '/minglr/transition_execution'
 require File.dirname(__FILE__) + '/minglr/input_cache'
 
