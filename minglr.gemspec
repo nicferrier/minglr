@@ -1,6 +1,8 @@
+require File.join(File.dirname(__FILE__), "lib", "version")
+
 Gem::Specification.new do |s|
   s.name     = "minglr"
-  s.version  = "0.1.0.3"
+  s.version  = MINGLR_VERSION
   s.date     = "2009-06-01"
   s.bindir          = 'bin'
   s.executables     << 'minglr'
