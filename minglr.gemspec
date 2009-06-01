@@ -1,5 +1,9 @@
 require File.join(File.dirname(__FILE__), "lib", "version")
 
+def manifest
+  `git ls-files`.split("\n") - [".gitignore"]
+end
+
 Gem::Specification.new do |s|
   s.name     = "minglr"
   s.version  = MINGLR_VERSION
@@ -12,5 +16,5 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/schubert/minglr/tree/master"
   s.description = "Mingle command line tool"
   s.authors  = ["Stephen Chu", "Chris O'Meara", "Michael Schubert"]
-  s.files    = Dir["bin/*"] + Dir["*.txt"] + Dir["lib/minglr/*.rb"] + Dir["lib/*.rb"] + ["minglr.gemspec", "Rakefile", "README.rdoc", "minglrconfig.sample"] + Dir["tasks/*"]
+  s.files    = manifest
 end
