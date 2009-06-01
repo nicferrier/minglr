@@ -1,8 +1,9 @@
 
  For more information:
-	on minglr, see http://minglr.rubyforge.org
+	on minglr, see http://github.com/schubert/minglr/tree/master
 	on Mingle, see http://mingle.thoughtworks.com/mingle-agile-project-management
-	on the author (Stephen Chu), see http://www.stephenchu.com
+	on the authors (Stephen Chu), see http://www.stephenchu.com
+	 (Michael Schubert), see http://schubert.cx/
 
  ======================================================================================================
  = Don't not forget to enable your Mingle API authentication by configuring the auth_config.yml file! =
