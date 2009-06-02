@@ -19,7 +19,8 @@ end
 
 if project
   uri_options.merge! rc_config[project]
-  uri_options[:url].gsub!(/^http\:\/\//, "")
+  uri_options[:protocol] = uri_options[:url].slice(/^.*\:/).chop
+  uri_options[:url].gsub!(/^(http|https)\:\/\//, "")
   uri_options[:host_and_port], uri_options[:project] = uri_options[:url].split("/projects/")
   MingleResource.configure uri_options
   Attachment.configure
