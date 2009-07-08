@@ -13,12 +13,10 @@ require File.dirname(__FILE__) + '/minglr/property_definition'
 require File.dirname(__FILE__) + '/minglr/attachment'
 require File.dirname(__FILE__) + '/minglr/transition_execution'
 require File.dirname(__FILE__) + '/minglr/input_cache'
-require File.dirname(__FILE__) + "/version"
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module Minglr
-  VERSION = MINGLR_VERSION
   ROOT    = File.expand_path File.join(File.dirname(__FILE__), '..')
 end

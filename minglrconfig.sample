@@ -3,7 +3,7 @@
 	username = yourusername
 	
 [someproject]
-  	url = http://your.mingle.host.com/mingle/projects/someproject
+	url = http://your.mingle.host.com/mingle/projects/someproject
 	username = yourusername
 	password = YOURMINGLEPASSWORD
 	delete_property = cp_story_status

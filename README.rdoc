@@ -71,33 +71,17 @@ Minglr can be used regardless your application is a Ruby on Rails web applicatio
 
 == INSTALL:
 
-* sudo gem install schubert-minglr
-* Preferably install rb-password (http://www.caliban.org/ruby/ruby-password.shtml), through Macports (sudo port install rb-password)
+* sudo gem install schubert-minglr -s http://gems.github.com
+
 * Enable Mingle API basic authentication in auth_config.yml, then restart it.
+
+* Preferably install rb-password (http://www.caliban.org/ruby/ruby-password.shtml), through Macports (sudo port install rb-password)
 * Copy over the "path-to-minglr/tasks/*.sample.rake" files and start customizing for your check-in needs.
 
-== LICENSE:
+== CREDITS:
 
-(The MIT License)
+Thank you to Stephen Chu and Chris O'Meara for their original work.
 
-Copyright (c) 2009 Michael Schubert
-Copyright (c) 2009 Stephen Chu
+== Copyright
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Copyright (c) 2009 Michael Schubert. See LICENSE for details.
