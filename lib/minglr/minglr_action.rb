@@ -27,14 +27,14 @@ class MinglrAction
   
   def cards
     attributes = [:number, :card_type_name, @config[:status_property].to_sym, :name]
-    cards = Card.find(:all)
+    cards = Resources::Card.find(:all)
     cards = filter_collection(cards, attributes, @options)
     print_collection(cards, attributes)
   end
 
   def users
     attributes = [:login, :name, :email]
-    users = User.find(:all).collect! { |user| user.user }
+    users = Resources::User.find(:all).collect! { |user| user.user }
     users = filter_collection(users, attributes, @options)
     print_collection(users, attributes, "right")
   end
@@ -43,7 +43,7 @@ class MinglrAction
     card_number = @options.first
     attributes = [:number, :card_type_name, @config[:status_property].to_sym, :name, :description]
     card = card_by_number(card_number)
-    attachments = Attachment.find(:all, :params => { :card_number => card_number })
+    attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
     attachments = attachments.collect do |attachment|
       "* #{attachment.file_name}: #{MingleResource.site + attachment.url}"
     end
@@ -63,8 +63,8 @@ Attachments:
   def attach
     card_number = @options.first
     if card_to_update = card_by_number(card_number)
-      url = Attachment.site
-      url = (url.to_s.gsub(/#{url.path}$/, '')) + Attachment.collection_path(:card_number => card_number)
+      url = Resources::Attachment.site
+      url = (url.to_s.gsub(/#{url.path}$/, '')) + Resources::Attachment.collection_path(:card_number => card_number)
       file_name = @flag_options[:file_attachment]
       require 'httpclient'
       if File.exist?(file_name)
@@ -88,7 +88,7 @@ Attachments:
   def fetch
     card_number = @options.first
     if card_to_update = card_by_number(card_number)
-      attachments = Attachment.find(:all, :params => { :card_number => card_number })
+      attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
       attachments.each do |attachment|
         url = MingleResource.site + attachment.url
         url.userinfo = nil, nil
@@ -100,7 +100,7 @@ Attachments:
   
   def create
     @flag_options.merge!({ @config[:status_property].to_sym => "New", :cp_owner_user_id => owner_id })
-    card = Card.new(@flag_options)
+    card = Resources::Card.new(@flag_options)
     card.save
     card.reload
     puts "Card #{card.number} created"
@@ -142,7 +142,7 @@ Attachments:
     next_transition = status_states.select {|state| state.first.downcase == current_status.downcase }.first.last
     transition_options.merge!({ :transition => next_transition })
 
-    if response = TransitionExecution.create(transition_options)
+    if response = Resources::TransitionExecution.create(transition_options)
       if response.attributes["status"] == "completed"
         puts "Moved card from #{current_status} to #{next_transition}"
       end
@@ -189,11 +189,11 @@ Attachments:
   end
   
   def card_by_number(number)
-    Card.find(number)
+    Resources::Card.find(number)
   end
   
   def owner_id
-    user = User.find(:all).select { |user| user.user.login == @config[:username] }.first
+    user = Resources::User.find(:all).select { |user| user.user.login == @config[:username] }.first
     user.user_id
   end
   

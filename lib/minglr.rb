@@ -3,16 +3,17 @@ require 'activesupport'
 require 'activeresource'
 require 'optparse'
 
-require File.dirname(__FILE__) + '/minglr/mingle_resource'
-require File.dirname(__FILE__) + '/minglr/mtx_options_parser'
-require File.dirname(__FILE__) + '/minglr/minglr_options_parser'
-require File.dirname(__FILE__) + '/minglr/minglr_config_parser'
-require File.dirname(__FILE__) + '/minglr/card'
-require File.dirname(__FILE__) + '/minglr/user'
-require File.dirname(__FILE__) + '/minglr/property_definition'
-require File.dirname(__FILE__) + '/minglr/attachment'
-require File.dirname(__FILE__) + '/minglr/transition_execution'
-require File.dirname(__FILE__) + '/minglr/input_cache'
+prefix = File.join(File.dirname(__FILE_), "minglr")
+require File.join(prefix, "mingle_resource")
+require File.join(prefix, "mtx_options_parser")
+require File.join(prefix, "minglr_options_parser")
+require File.join(prefix, "minglr_config_parser")
+require File.join(prefix, "input_cache")
+
+resources = File.join(prefix, "resources", "*")
+Dir[resources].each do |file_name|
+  load file_name
+end
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
