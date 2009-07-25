@@ -1,11 +1,16 @@
 class MinglrOptionsParser
   def self.parse(args, *required_by_command)
     project_options = []
-
-    if MingleResource.site
-      properties = PropertyDefinition.find(:all)
-      project_options = properties.collect do |property|
-        [property.column_name.to_sym, property.name]
+    
+    if Resources::Base.site
+      begin
+        properties = Resources::PropertyDefinition.find(:all)
+        project_options = properties.collect do |property|
+          [property.column_name.to_sym, property.name]
+        end
+      rescue ActiveResource::UnauthorizedAccess => exception
+        puts "Connection #{exception.message} to #{Resources::Base.site.to_s}\nDid you set 'basic_authentication_enabled: true' in your auth_config.yml file?"
+        exit 1
       end
     end
     command_options = {}

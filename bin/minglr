@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr'))
-require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr', "minglr_action"))
 
 rc_config = MinglrConfigParser.parse
 uri_options = rc_config[:global] || {}
@@ -17,13 +16,10 @@ else
   end
 end
 
-if project
+unless project.nil?
   uri_options.merge! rc_config[project]
-  uri_options[:protocol] = uri_options[:url].slice(/^.*\:/).chop
-  uri_options[:url].gsub!(/^(http|https)\:\/\//, "")
-  uri_options[:host_and_port], uri_options[:project] = uri_options[:url].split("/projects/")
-  MingleResource.configure uri_options
-  Attachment.configure
+  Resources::Base.configure uri_options
+  Resources::Attachment.configure
   extra_options = MinglrOptionsParser.parse(original_arguments)
   MinglrAction.execute(action, ARGV, extra_options, rc_config[project])
 end

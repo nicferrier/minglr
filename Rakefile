@@ -63,3 +63,5 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+
+task "dev" => ["test", "gemspec", "build"]

@@ -1,4 +1,4 @@
-module Resource
+module Resources
   
   class Card < Base
   end

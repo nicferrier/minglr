@@ -18,7 +18,7 @@ class MinglrConfigParser
     config_contents.each_line do |line|
       line = line.strip!
       case line
-      when ""
+      when "", /^#.*$/
         next
       when /\[(.*)\]/
         define_section($1.to_s)

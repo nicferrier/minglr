@@ -21,7 +21,7 @@ class MinglrAction
     begin
       self.send(action)
     rescue ActiveResource::ResourceNotFound => error
-      puts error.message + " for URL #{MingleResource.site}..."
+      puts error.message + " for URL #{Resources::Base.site}..."
     end
   end
   
@@ -45,7 +45,7 @@ class MinglrAction
     card = card_by_number(card_number)
     attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
     attachments = attachments.collect do |attachment|
-      "* #{attachment.file_name}: #{MingleResource.site + attachment.url}"
+      "* #{attachment.file_name}: #{Resources::Base.site + attachment.url}"
     end
     output = <<-EOS
      Number: #{card.number}
@@ -90,7 +90,7 @@ Attachments:
     if card_to_update = card_by_number(card_number)
       attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
       attachments.each do |attachment|
-        url = MingleResource.site + attachment.url
+        url = Resources::Base.site + attachment.url
         url.userinfo = nil, nil
         puts "Downloading #{url.to_s}:"
         `curl --insecure --progress-bar --output #{attachment.file_name} --user #{@config[:username]}:#{@config[:password]} #{url}`
