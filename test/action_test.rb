@@ -10,7 +10,8 @@ module Minglr
         
         should "return an array of valid actions" do
           valid_actions = ["users", "cards", "card", "move", "update", "attach", "projects", "create", "fetch"].sort
-          assert_equal valid_actions, Action.valid_actions.sort
+          assert_equal [], (valid_actions - Action.valid_actions)
+          #assert_equal valid_actions, Action.valid_actions.sort
         end
       
       end
@@ -29,20 +30,45 @@ module Minglr
       
       context "execute" do
         
-        should_eventually "ignore the first option if no project is specified" do
+        should "ignore the first option if no project is specified" do
+          action = :someaction
+          options = ["someaction", "option2"]
+          flag_options = { :foo => "bar" }
+          config = { :foo => "bar" }
+          
+          Minglr::Action::Commands.expects(:send).with(action, ["option2"], flag_options, config)
+          Action.execute(action, options, flag_options, config)
         end
         
-        should_eventually "ignore the first two options if project is specified" do
+        should "ignore the first two options if project is specified" do
+          action = :someaction
+          options = ["someproject", "someaction", "option2"]
+          flag_options = { :foo => "bar" }
+          config = { :foo => "bar" }
+          
+          Minglr::Action::Commands.expects(:send).with(action, ["option2"], flag_options, config)
+          Action.execute(action, options, flag_options, config)          
         end
         
-        should_eventually "send the action to commands" do
+        should "send the action to commands" do
+          action = "someaction"
+          options = ["option1", "option2"]
+          flag_options = { :foo => "bar" }
+          config = { :foo => "bar" }
+          
+          Minglr::Action::Commands.expects(:send).with(action, options, flag_options, config)
+          Action.execute(action, options, flag_options, config)
         end
         
-        should_eventually "rescue and print an error if the resource can't be found" do
+        should "rescue and print an error if the resource can't be found" do
+          Action.expects(:puts).with("Failed with MyError for URL #{Resources::Base.site}...")
+          Minglr::Action::Commands.expects(:send).raises(ActiveResource::ResourceNotFound, stub("Response", :code => "MyError"))
+          
+          Action.execute("someaction", ["someaction"])
         end
         
       end
-    
+       
     end
   
   end

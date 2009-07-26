@@ -63,5 +63,17 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+begin
+  require 'cucumber'
+  require 'cucumber/rake/task'
 
-task "dev" => ["test", "gemspec", "build"]
+  Cucumber::Rake::Task.new(:features) do |t|
+    t.cucumber_opts = "features --format pretty"
+  end
+rescue LoadError
+  task :features do
+    abort "Cucumber is not available. In order to run features, you must: sudo gem install cucumber"
+  end
+end
+
+task "ci" => ["test", "features", "gemspec", "build", "install"]

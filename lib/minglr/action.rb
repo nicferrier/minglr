@@ -12,7 +12,7 @@ module Minglr
       begin
         Commands.send(action, options, flag_options, config)
       rescue ActiveResource::ResourceNotFound => error
-        puts error.message + " for URL #{Resources::Base.site}..."
+        puts error.message + "for URL #{Resources::Base.site}..."
       end
     end
   

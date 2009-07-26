@@ -1,8 +1,8 @@
+# -*- encoding: utf-8 -*-
+
 Gem::Specification.new do |s|
   s.name = %q{minglr}
   s.version = "1.2.0"
-
-  s.specification_version = 2 if s.respond_to? :specification_version=
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara"]
@@ -54,15 +54,15 @@ Gem::Specification.new do |s|
      "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]
-  s.has_rdoc = true
   s.homepage = %q{http://github.com/schubert/minglr}
   s.post_install_message = %q{PostInstall.txt}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.0.1}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{command line user tool for Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management)}
   s.test_files = [
     "test/action_test.rb",
+     "test/commands_test.rb",
      "test/config_parser_test.rb",
      "test/extensions/array_test.rb",
      "test/options_parser_test.rb",
@@ -74,4 +74,14 @@ Gem::Specification.new do |s|
      "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]
+
+  if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
+    s.specification_version = 3
+
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    else
+    end
+  else
+  end
 end
