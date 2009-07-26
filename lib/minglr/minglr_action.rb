@@ -49,10 +49,7 @@ class MinglrAction
   end
 
   def users
-    attributes = [:login, :name, :email]
-    users = Resources::User.find(:all).collect! { |user| user.user }
-    users = filter_collection(users, attributes, @options)
-    print_collection(users, attributes, "right")
+    Resources::User.collection(@options)
   end
 
   def card

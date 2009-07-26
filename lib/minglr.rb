@@ -16,6 +16,11 @@ Dir[resources].each do |file_name|
   load file_name
 end
 
+extensions = File.join(prefix, "extensions", "*")
+Dir[extensions].each do |file_name|
+  load file_name
+end
+
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 

@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "bin/minglr",
      "bin/mtx",
      "lib/minglr.rb",
+     "lib/minglr/extensions/array.rb",
      "lib/minglr/input_cache.rb",
      "lib/minglr/minglr_action.rb",
      "lib/minglr/minglr_config_parser.rb",
@@ -41,8 +42,10 @@ Gem::Specification.new do |s|
      "minglrconfig.sample",
      "tasks/commit.sample.rake",
      "tasks/svn.sample.rake",
+     "test/extensions/array_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
+     "test/resources/project_test.rb",
      "test/test_helper.rb"
   ]
   s.has_rdoc = true
@@ -53,7 +56,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.0.1}
   s.summary = %q{command line user tool for Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management)}
   s.test_files = [
-    "test/resources/attachment_test.rb",
+    "test/extensions/array_test.rb",
+     "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
      "test/resources/project_test.rb",
      "test/test_helper.rb"
