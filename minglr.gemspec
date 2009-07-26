@@ -43,7 +43,9 @@ Gem::Specification.new do |s|
      "tasks/commit.sample.rake",
      "tasks/svn.sample.rake",
      "test/action_test.rb",
+     "test/config_parser_test.rb",
      "test/extensions/array_test.rb",
+     "test/options_parser_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
      "test/resources/card_test.rb",
@@ -61,7 +63,9 @@ Gem::Specification.new do |s|
   s.summary = %q{command line user tool for Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management)}
   s.test_files = [
     "test/action_test.rb",
+     "test/config_parser_test.rb",
      "test/extensions/array_test.rb",
+     "test/options_parser_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
      "test/resources/card_test.rb",
