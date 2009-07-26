@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
      "test/resources/base_test.rb",
      "test/resources/card_test.rb",
      "test/resources/project_test.rb",
+     "test/resources/property_definition_test.rb",
      "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]
@@ -63,6 +64,7 @@ Gem::Specification.new do |s|
      "test/resources/base_test.rb",
      "test/resources/card_test.rb",
      "test/resources/project_test.rb",
+     "test/resources/property_definition_test.rb",
      "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]

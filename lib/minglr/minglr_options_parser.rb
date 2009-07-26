@@ -7,7 +7,8 @@ module Minglr
         begin
           project_options = Resources::PropertyDefinition.project_options
         rescue ActiveResource::UnauthorizedAccess => exception
-          puts "Connection #{exception.message} to #{Resources::Base.site.to_s}\nDid you set 'basic_authentication_enabled: true' in your auth_config.yml file?"
+          puts "Connection #{exception.message} to #{Resources::Base.site.to_s}"
+          puts "Did you set 'basic_authentication_enabled: true' in your auth_config.yml file?"
           exit 1
         end
       end

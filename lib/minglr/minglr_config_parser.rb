@@ -1,6 +1,7 @@
 module Minglr
   
   class ConfigParser
+    
     CONFIG_FILE = ".minglrconfig"
     attr_reader :config
   
