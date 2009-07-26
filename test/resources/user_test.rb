@@ -8,7 +8,7 @@ module Resources
     
       context "print_all" do
         
-        should "should warn if there are no users" do
+        should "warn if there are no users" do
           User.expects(:find).with(:all).returns([])
           User.expects(:warn).with("No users in project")
           User.print_all

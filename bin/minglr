@@ -2,7 +2,7 @@
 
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr'))
 
-rc_config = MinglrConfigParser.parse
+rc_config = Minglr::ConfigParser.parse
 uri_options = rc_config[:global] || {}
 project = rc_config[:global][:default].to_sym if rc_config[:global][:default]
 original_arguments = ARGV
@@ -24,6 +24,6 @@ unless project.nil?
   uri_options.merge! rc_config[project]
   Resources::Base.configure uri_options
   Resources::Attachment.configure
-  extra_options = MinglrOptionsParser.parse(original_arguments)
+  extra_options = Minglr::OptionsParser.parse(original_arguments)
   Minglr::Action.execute(action, ARGV, extra_options, rc_config[project])
 end
