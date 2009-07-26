@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
      "test/resources/project_test.rb",
+     "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]
   s.has_rdoc = true
@@ -60,6 +61,7 @@ Gem::Specification.new do |s|
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
      "test/resources/project_test.rb",
+     "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]
 end
