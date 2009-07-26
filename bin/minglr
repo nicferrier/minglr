@@ -17,6 +17,10 @@ else
 end
 
 unless project.nil?
+  if action.nil?
+    puts "No action specified. Valid actions are: #{MinglrAction::ACTIONS.join(", ")}"
+    exit 1
+  end
   uri_options.merge! rc_config[project]
   Resources::Base.configure uri_options
   Resources::Attachment.configure
