@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
      "test/extensions/array_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
+     "test/resources/card_test.rb",
      "test/resources/project_test.rb",
      "test/resources/user_test.rb",
      "test/test_helper.rb"
@@ -60,6 +61,7 @@ Gem::Specification.new do |s|
     "test/extensions/array_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
+     "test/resources/card_test.rb",
      "test/resources/project_test.rb",
      "test/resources/user_test.rb",
      "test/test_helper.rb"

@@ -4,7 +4,7 @@ module Resources
   
   class UserTest < Test::Unit::TestCase
   
-    context Attachment do
+    context User do
     
       context "print_all" do
         
@@ -23,6 +23,13 @@ module Resources
           User.print_all
         end
       
+      end
+      
+      context "find_user_id_for_user" do
+        
+        should_eventually "return the owner_id of the user matching the username" do
+        end
+        
       end
     
     end

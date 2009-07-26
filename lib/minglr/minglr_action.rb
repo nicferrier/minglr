@@ -38,14 +38,7 @@ class MinglrAction
   end
   
   def cards
-    attributes = [:number, :card_type_name, status_property, :name].compact
-    cards = Resources::Card.find(:all)
-    if cards.any?
-      cards = filter_collection(cards, attributes, @options)
-      print_collection(cards, attributes)
-    else
-      puts "No cards found"
-    end
+    Resources::Card.collection(@options.merge({:status_property => @config[:status_property]}))
   end
 
   def users
@@ -168,6 +161,14 @@ Attachments:
   
   private
   
+  def card_by_number(number)
+    Resources::Card.find(number)
+  end
+  
+  def owner_id
+    Resources::User.find_user_id_for_user(@config[:username])
+  end
+  
   def filter_collection(collection, attributes, words)
     words.each do |word|
       collection = collection.select do |element|
@@ -199,15 +200,6 @@ Attachments:
       end
       puts row.join(" - ")
     end
-  end
-  
-  def card_by_number(number)
-    Resources::Card.find(number)
-  end
-  
-  def owner_id
-    user = Resources::User.find(:all).select { |user| user.user.login == @config[:username] }.first
-    user.user_id
   end
   
 end

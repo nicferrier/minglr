@@ -28,6 +28,16 @@ module Resources
       
       end
       
+      context "print_collection" do
+        
+        should_eventually "print values of attributes of objects separated by dashes and aligning columns of values" do
+        end
+        
+        should_eventually "allow for right adjusted values" do
+        end
+        
+      end
+      
     end
 
   end
