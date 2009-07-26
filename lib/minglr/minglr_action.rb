@@ -1,6 +1,6 @@
 class MinglrAction
   
-  ACTIONS = ["cards", "card", "create", "update", "move", "users", "attach", "fetch"].sort!
+  ACTIONS = ["projects", "cards", "card", "create", "update", "move", "users", "attach", "fetch"].sort!
   
   def self.execute(action, options = [], flag_options = {}, config = {})
     MinglrAction.new(action.to_sym, options, flag_options, config)
@@ -25,11 +25,27 @@ class MinglrAction
     end
   end
   
+  def projects
+    raise "busted"
+    attributes = [:name, :description]
+    projects = Resources::Project.find(:all)
+    projects = filter_collection(projects, attributes, @options)
+    print_collection(projects, attributes)
+  end
+  
+  def status_property
+    @config[:status_property].nil? ? nil : @config[:status_property].to_sym
+  end
+  
   def cards
-    attributes = [:number, :card_type_name, @config[:status_property].to_sym, :name]
+    attributes = [:number, :card_type_name, status_property, :name].compact
     cards = Resources::Card.find(:all)
-    cards = filter_collection(cards, attributes, @options)
-    print_collection(cards, attributes)
+    if cards.any?
+      cards = filter_collection(cards, attributes, @options)
+      print_collection(cards, attributes)
+    else
+      puts "No cards found"
+    end
   end
 
   def users
@@ -41,7 +57,7 @@ class MinglrAction
 
   def card
     card_number = @options.first
-    attributes = [:number, :card_type_name, @config[:status_property].to_sym, :name, :description]
+    attributes = [:number, :card_type_name, status_property, :name, :description].compact
     card = card_by_number(card_number)
     attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
     attachments = attachments.collect do |attachment|
@@ -51,7 +67,7 @@ class MinglrAction
      Number: #{card.number}
        Name: #{card.name}
        Type: #{card.card_type_name}
-     Status: #{card.send(@config[:status_property].to_sym)}
+     Status: #{card.send(status_property) if status_property}
 Description: #{card.description}
 
 Attachments:
@@ -123,7 +139,7 @@ Attachments:
     card_to_move = card_by_number(card_number)
     transition_options = { :card => card_number }
     transition_options.merge!({ :comment => @flag_options[:comment]}) if @flag_options[:comment]
-    current_status = card_to_move.send(@config[:status_property])
+    current_status = card_to_move.send(@config[:status_property]) if status_property
     next_transition = nil
     
     case card_to_move.card_type_name.downcase

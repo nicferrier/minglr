@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara"]
-  s.date = %q{2009-07-25}
+  s.date = %q{2009-07-26}
   s.description = %q{* This gem provides two executable binaries to interact with Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management) through its API. It also has sample interactive Rake task on how to facilitate easy card movements when a card enters/exits the development queue.  * mtx is a binary that facilities transition changes for use on rake tasks * minglr is a more interactive tool that provides a quick interface for many common uses}
   s.email = %q{michael@schubert.cx}
   s.executables = ["mtx", "minglr"]
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/minglr/resources/attachment.rb",
      "lib/minglr/resources/base.rb",
      "lib/minglr/resources/card.rb",
+     "lib/minglr/resources/project.rb",
      "lib/minglr/resources/property_definition.rb",
      "lib/minglr/resources/transition_execution.rb",
      "lib/minglr/resources/user.rb",
@@ -40,6 +41,8 @@ Gem::Specification.new do |s|
      "minglrconfig.sample",
      "tasks/commit.sample.rake",
      "tasks/svn.sample.rake",
+     "test/resources/attachment_test.rb",
+     "test/resources/base_test.rb",
      "test/test_helper.rb"
   ]
   s.has_rdoc = true
@@ -52,6 +55,7 @@ Gem::Specification.new do |s|
   s.test_files = [
     "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
+     "test/resources/project_test.rb",
      "test/test_helper.rb"
   ]
 end
