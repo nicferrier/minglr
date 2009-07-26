@@ -9,7 +9,7 @@ require File.join(prefix, "options_parser")
 require File.join(prefix, "config_parser")
 
 mtx = File.join(prefix, "mtx", "*")
-Dir[extensions].each do |file_name|
+Dir[mtx].each do |file_name|
   load file_name
 end
 
