@@ -27,7 +27,7 @@ module Resources
           card1 = stub("Card", :number => 1, :card_type_name => "Story", :name => "Some Story", :cp_status => "Ready")
           Card.expects(:find).with(:all).returns([card1])
           Card.expects(:puts).with("1 - Story - Ready - Some Story")
-          Card.print_all({:status_property => "cp_status"})
+          Card.print_all([], "cp_status")
         end
       
       end

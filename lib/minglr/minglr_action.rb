@@ -26,11 +26,7 @@ class MinglrAction
   end
   
   def projects
-    raise "busted"
-    attributes = [:name, :description]
-    projects = Resources::Project.find(:all)
-    projects = filter_collection(projects, attributes, @options)
-    print_collection(projects, attributes)
+    Resources::Project.print_all(@options, @config[:status_property])
   end
   
   def status_property
@@ -38,32 +34,15 @@ class MinglrAction
   end
   
   def cards
-    Resources::Card.collection(@options.merge({:status_property => @config[:status_property]}))
+    Resources::Card.print_all(@options, @config[:status_property])
   end
 
   def users
-    Resources::User.collection(@options)
+    Resources::User.print_all(@options)
   end
 
   def card
-    card_number = @options.first
-    attributes = [:number, :card_type_name, status_property, :name, :description].compact
-    card = card_by_number(card_number)
-    attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
-    attachments = attachments.collect do |attachment|
-      "* #{attachment.file_name}: #{Resources::Base.site + attachment.url}"
-    end
-    output = <<-EOS
-     Number: #{card.number}
-       Name: #{card.name}
-       Type: #{card.card_type_name}
-     Status: #{card.send(status_property) if status_property}
-Description: #{card.description}
-
-Attachments:
-  #{attachments.join("\n")}
-    EOS
-    puts output
+    Resources::Card.print_card(@options.first, @config[:status_property])
   end
   
   def attach
@@ -167,39 +146,6 @@ Attachments:
   
   def owner_id
     Resources::User.find_user_id_for_user(@config[:username])
-  end
-  
-  def filter_collection(collection, attributes, words)
-    words.each do |word|
-      collection = collection.select do |element|
-        output = ""
-        attributes.each { |attribute| output << element.send(attribute).to_s + " " }
-        output =~ /#{word}/i
-      end
-    end
-    collection
-  end
-  
-  def print_collection(collection, attributes, align = "left")
-    output = []
-    longest_attributes = Array.new(attributes.length, 0)
-    alignment = (align == "left" ? :ljust : :rjust)
-    collection.each do |element|
-      entry = []
-      attributes.each_with_index do |attribute, index|
-        attribute_value = element.send(attribute).to_s
-        longest_attributes[index] = attribute_value.length if attribute_value.length > longest_attributes[index]
-        entry << attribute_value
-      end
-      output << entry
-    end
-    output.each do |entry|
-      row = []
-      entry.each_with_index do |part, index|
-        row << [part.send(alignment, longest_attributes[index])]
-      end
-      puts row.join(" - ")
-    end
   end
   
 end
