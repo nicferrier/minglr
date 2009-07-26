@@ -39,6 +39,32 @@ module Resources
         
       end
       
+      context "create" do
+        
+        should_eventually "create a card with options passed in" do
+        end
+        
+        should_eventually "create a card with the status of new if status property is available" do
+        end
+        
+        should_eventually "warn if it is unable to create the card" do
+        end
+        
+      end
+      
+      context "update" do
+        
+        should_eventually "update a card with the options passed in" do
+        end
+        
+        should_eventually "print out the details of the card after updating" do
+        end
+        
+        should_eventually "warn if it is not able to find the card" do
+        end
+        
+      end
+      
       context "to_s" do
         
         should_eventually "format the details of a given card including attachments" do

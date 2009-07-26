@@ -14,7 +14,8 @@ class MinglrAction
     if action == options[0].to_sym
       options.shift
     else
-      options.shift; options.shift
+      options.shift
+      options.shift
     end
     @options = options
     @flag_options = flag_options
@@ -40,13 +41,8 @@ class MinglrAction
     Resources::Card.print_all(@options, @config[:status_property])
   end
   
-  # TODO
   def create
-    @flag_options.merge!({ @config[:status_property].to_sym => "New", :cp_owner_user_id => owner_id })
-    card = Resources::Card.new(@flag_options)
-    card.save
-    card.reload
-    puts "Card #{card.number} created"
+    Resources::Card.create(@flag_options, @config[:status_property])
   end
   
   def fetch
@@ -57,7 +53,7 @@ class MinglrAction
   # TODO
   def move
     card_number = @options.first
-    card_to_move = card_by_number(card_number)
+    card_to_move = Resources::Card.find(card_number)
     transition_options = { :card => card_number }
     transition_options.merge!({ :comment => @flag_options[:comment]}) if @flag_options[:comment]
     current_status = card_to_move.send(@config[:status_property]) if status_property
@@ -95,17 +91,9 @@ class MinglrAction
     Resources::Project.print_all(@options, @config[:status_property])
   end
   
-  # TODO
   def update
-    @flag_options.merge!({ :cp_owner_user_id => owner_id })
     card_number = @options.first
-    card_to_update = card_by_number(card_number)
-    @flag_options.each do |attribute, value|
-      card_to_update.send("#{attribute.to_s}=".to_sym, value)
-    end
-    card_to_update.save
-    puts "Card #{card_to_update.number} updated\n\n"
-    card
+    Resources::Card.update(card_number, @flag_options)
   end
   
   def users
@@ -118,15 +106,5 @@ class MinglrAction
   def status_property
     @config[:status_property].nil? ? nil : @config[:status_property].to_sym
   end
-  
-  # TODO
-  def card_by_number(number)
-    Resources::Card.find(number)
-  end
 
-  # TODO  
-  def owner_id
-    Resources::User.find_user_id_for_user(@config[:username])
-  end
-  
 end
