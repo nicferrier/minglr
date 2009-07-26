@@ -35,6 +35,10 @@ module Resources
         end
       end
       
+      def warn(message)
+        puts "Warning: #{message}"
+      end
+      
     end
   
   end

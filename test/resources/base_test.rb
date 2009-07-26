@@ -18,7 +18,16 @@ module Resources
         end
     
       end
-    
+      
+      context "warn" do
+        
+        should "prepend message with warning" do
+          Base.expects(:puts).with("Warning: test")
+          Base.warn("test")
+        end
+      
+      end
+      
     end
 
   end

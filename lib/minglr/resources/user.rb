@@ -10,7 +10,7 @@ module Resources
       if users.any?
         print_collection users, attributes, :right
       else
-        puts "No users in project"
+        warn "No users in project"
       end
     end
     
