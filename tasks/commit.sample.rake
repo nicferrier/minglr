@@ -64,7 +64,7 @@ namespace :minglr do
         end
       else
         print "#{message}"
-        if cache = InputCache.get(options[:cache_key])
+        if cache = MTX::InputCache.get(options[:cache_key])
           print " [#{cache}]"
         end
         print ": "
@@ -72,8 +72,8 @@ namespace :minglr do
       end
 
     if !options[:secure] && cache_key = options.delete(:cache_key)
-      user_input = InputCache.get(cache_key) if user_input.blank?
-      InputCache.put(cache_key, user_input)
+      user_input = MTX::InputCache.get(cache_key) if user_input.blank?
+      MTX::InputCache.put(cache_key, user_input)
     end
     
     user_input = escape(user_input)

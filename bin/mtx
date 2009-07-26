@@ -2,12 +2,12 @@
 
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib', 'minglr'))
 
-uri_options, execution_options = MtxOptionsParser.parse(ARGV, :card, :transition)
+uri_options, execution_options = MTX::OptionsParser.parse(ARGV, :card, :transition)
 
 Resources::Base.configure uri_options
 
-if card = Card.find(execution_options[:card])
-  execution = TransitionExecution.create(execution_options)
+if card = Resources::Card.find(execution_options[:card])
+  execution = Resources::TransitionExecution.create(execution_options)
   raise "Transition aborted. Errors: #{execution.errors.full_messages}" if execution.errors.any?
 else
   raise "Card '#{execution_options[:card]}' cannot be found."

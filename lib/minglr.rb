@@ -8,8 +8,10 @@ require File.join(prefix, "action")
 require File.join(prefix, "options_parser")
 require File.join(prefix, "config_parser")
 
-require File.join(prefix, "mtx_options_parser")
-require File.join(prefix, "input_cache")
+mtx = File.join(prefix, "mtx", "*")
+Dir[extensions].each do |file_name|
+  load file_name
+end
 
 require File.join(prefix, "resources", "base")
 resources = File.join(prefix, "resources", "*")
