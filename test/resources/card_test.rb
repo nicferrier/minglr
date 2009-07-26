@@ -5,10 +5,33 @@ module Resources
   class CardTest < Test::Unit::TestCase
   
     context Card do
-    
+      
+      context "create" do
+        
+        should_eventually "create a card with options passed in" do
+        end
+        
+        should_eventually "create a card with the status of new if status property is available" do
+        end
+        
+        should_eventually "warn if it is unable to create the card" do
+        end
+        
+      end
+      
+      context "move" do
+        
+        should "move card from one state to the next as defined" do
+        end
+        
+        should "warn if card cannot be found" do
+        end
+        
+      end
+      
       context "print_all" do
         
-        should "should warn if there are no cards" do
+        should "warn if there are no cards" do
           Card.expects(:find).with(:all).returns([])
           Card.expects(:warn).with("No cards found")
           Card.print_all
@@ -35,19 +58,6 @@ module Resources
       context "print_card" do
         
         should_eventually "print the details for a given card" do
-        end
-        
-      end
-      
-      context "create" do
-        
-        should_eventually "create a card with options passed in" do
-        end
-        
-        should_eventually "create a card with the status of new if status property is available" do
-        end
-        
-        should_eventually "warn if it is unable to create the card" do
         end
         
       end

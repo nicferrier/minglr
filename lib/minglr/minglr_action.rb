@@ -50,41 +50,9 @@ class MinglrAction
     Resources::Attachment.fetch(card_number, @config[:username], @config[:password])
   end
   
-  # TODO
   def move
     card_number = @options.first
-    card_to_move = Resources::Card.find(card_number)
-    transition_options = { :card => card_number }
-    transition_options.merge!({ :comment => @flag_options[:comment]}) if @flag_options[:comment]
-    current_status = card_to_move.send(@config[:status_property]) if status_property
-    next_transition = nil
-    
-    case card_to_move.card_type_name.downcase
-    when /task/
-      status_states = @config.select do |key, value|
-        key.to_s =~ /^task_state_/
-      end
-    when /story/
-      status_states = @config.select do |key, value|
-        key.to_s =~ /^story_state/
-      end
-    else
-      puts "No transitions defined for card of type #{card_to_move.card_type_name}"  
-    end
-    status_states = status_states.collect {|state| state.last }.collect {|state| state.split(">").collect { |value| value.strip } }
-    next_transition = status_states.select {|state| state.first.downcase == current_status.downcase }.first.last
-    transition_options.merge!({ :transition => next_transition })
-
-    if response = Resources::TransitionExecution.create(transition_options)
-      if response.attributes["status"] == "completed"
-        puts "Moved card from #{current_status} to #{next_transition}"
-      end
-    end
-  end
-  
-  # TODO
-  def pickup
-    raise "not implemented yet"
+    Resources::Card.move(card_number, @flag_options, @config)
   end
   
   def projects
@@ -98,13 +66,6 @@ class MinglrAction
   
   def users
     Resources::User.print_all(@options)
-  end
-  
-  private
-  
-  # TODO
-  def status_property
-    @config[:status_property].nil? ? nil : @config[:status_property].to_sym
   end
 
 end
