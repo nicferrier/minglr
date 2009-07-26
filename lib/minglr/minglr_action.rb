@@ -47,27 +47,8 @@ class MinglrAction
   
   def attach
     card_number = @options.first
-    if card_to_update = card_by_number(card_number)
-      url = Resources::Attachment.site
-      url = (url.to_s.gsub(/#{url.path}$/, '')) + Resources::Attachment.collection_path(:card_number => card_number)
-      file_name = @flag_options[:file_attachment]
-      require 'httpclient'
-      if File.exist?(file_name)
-        File.open(file_name) do |file|
-          body = { 'file' => file, "filename" => file_name }
-          client = HTTPClient.new
-          client.set_auth(nil, @config[:username], @config[:password])
-          res = client.post(url, body)
-          if res.status_code == 201
-            puts "File '#{file_name}' attached to card #{card_number}"
-          else
-            puts "Error attaching file '#{file_name}' to card #{card_number} (Got back HTTP code #{res.status_code})"
-          end
-        end
-      else
-        puts "Unable to open file '#{file_name}'"
-      end
-    end
+    file_name = @flag_options[:file_attachment]
+    Resources::Attachment.attach(card_number, file_name, @config[:username], @config[:password])
   end
   
   def fetch
