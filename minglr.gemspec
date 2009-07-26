@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
      "minglrconfig.sample",
      "tasks/commit.sample.rake",
      "tasks/svn.sample.rake",
+     "test/action_test.rb",
      "test/extensions/array_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
@@ -59,7 +60,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.0.1}
   s.summary = %q{command line user tool for Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management)}
   s.test_files = [
-    "test/extensions/array_test.rb",
+    "test/action_test.rb",
+     "test/extensions/array_test.rb",
      "test/resources/attachment_test.rb",
      "test/resources/base_test.rb",
      "test/resources/card_test.rb",
