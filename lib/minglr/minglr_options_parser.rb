@@ -17,7 +17,7 @@ class MinglrOptionsParser
     parser = OptionParser.new do |opts|
       opts.banner = "Usage: minglr [action] [options]"
       opts.separator ""
-      opts.separator "Valid Commands Are: #{MinglrAction::ACTIONS.join(", ")}"
+      opts.separator "Valid Commands Are: #{Minglr::Action.valid_actions.join(", ")}"
       
       opts.on("-n NAME", String, "Short name of card") do |card_name|
         command_options[:name] = card_name

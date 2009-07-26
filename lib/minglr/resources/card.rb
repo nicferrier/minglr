@@ -3,7 +3,7 @@ module Resources
   class Card < Base
     
     def self.create(options = {}, status_property = nil)
-      options.merge!{status_property.to_sym => "New"} if status_property
+      options.merge!({status_property.to_sym => "New"}) if status_property
       card = self.new(options)
       if card.save
         card.reload

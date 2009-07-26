@@ -7,7 +7,7 @@ uri_options = rc_config[:global] || {}
 project = rc_config[:global][:default].to_sym if rc_config[:global][:default]
 original_arguments = ARGV
 
-if MinglrAction::ACTIONS.include?(ARGV[0])
+if Minglr::Action.valid_action?(ARGV[0])
   action = ARGV[0]
 else
   if ARGV[0] && (ARGV[0] =~ /^--/).nil?
@@ -18,12 +18,12 @@ end
 
 unless project.nil?
   if action.nil?
-    puts "No action specified. Valid actions are: #{MinglrAction::ACTIONS.join(", ")}"
+    puts "No action specified. Valid actions are: #{Minglr::Action.valid_actions.join(", ")}"
     exit 1
   end
   uri_options.merge! rc_config[project]
   Resources::Base.configure uri_options
   Resources::Attachment.configure
   extra_options = MinglrOptionsParser.parse(original_arguments)
-  MinglrAction.execute(action, ARGV, extra_options, rc_config[project])
+  Minglr::Action.execute(action, ARGV, extra_options, rc_config[project])
 end
