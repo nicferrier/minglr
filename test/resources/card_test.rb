@@ -31,6 +31,20 @@ module Resources
         end
       
       end
+      
+      context "print_card" do
+        
+        should_eventually "print the details for a given card" do
+        end
+        
+      end
+      
+      context "to_s" do
+        
+        should_eventually "format the details of a given card including attachments" do
+        end
+        
+      end
     
     end
 

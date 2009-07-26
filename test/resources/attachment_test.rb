@@ -18,6 +18,13 @@ module Resources
         end
       
       end
+      
+      context "fetch" do
+        
+        should_eventually "attempt to download all found attachments for a given card number" do
+        end
+      
+      end
     
     end
 

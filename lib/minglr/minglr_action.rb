@@ -72,15 +72,7 @@ class MinglrAction
   
   def fetch
     card_number = @options.first
-    if card_to_update = card_by_number(card_number)
-      attachments = Resources::Attachment.find(:all, :params => { :card_number => card_number })
-      attachments.each do |attachment|
-        url = Resources::Base.site + attachment.url
-        url.userinfo = nil, nil
-        puts "Downloading #{url.to_s}:"
-        `curl --insecure --progress-bar --output #{attachment.file_name} --user #{@config[:username]}:#{@config[:password]} #{url}`
-      end
-    end
+    Resources::Attachment.fetch(card_number, @config[:username], @config[:password])
   end
   
   def create
