@@ -1,5 +1,6 @@
 class MinglrAction
   
+  # TODO
   ACTIONS = ["projects", "cards", "card", "create", "update", "move", "users", "attach", "fetch"].sort!
   
   def self.execute(action, options = [], flag_options = {}, config = {})
@@ -25,37 +26,21 @@ class MinglrAction
     end
   end
   
-  def projects
-    Resources::Project.print_all(@options, @config[:status_property])
-  end
-  
-  def status_property
-    @config[:status_property].nil? ? nil : @config[:status_property].to_sym
-  end
-  
-  def cards
-    Resources::Card.print_all(@options, @config[:status_property])
-  end
-
-  def users
-    Resources::User.print_all(@options)
+  def attach
+    card_number = @options.first
+    file_name = @flag_options[:file_attachment]
+    Resources::Attachment.attach(card_number, file_name, @config[:username], @config[:password])
   end
 
   def card
     Resources::Card.print_card(@options.first, @config[:status_property])
   end
   
-  def attach
-    card_number = @options.first
-    file_name = @flag_options[:file_attachment]
-    Resources::Attachment.attach(card_number, file_name, @config[:username], @config[:password])
+  def cards
+    Resources::Card.print_all(@options, @config[:status_property])
   end
   
-  def fetch
-    card_number = @options.first
-    Resources::Attachment.fetch(card_number, @config[:username], @config[:password])
-  end
-  
+  # TODO
   def create
     @flag_options.merge!({ @config[:status_property].to_sym => "New", :cp_owner_user_id => owner_id })
     card = Resources::Card.new(@flag_options)
@@ -64,18 +49,12 @@ class MinglrAction
     puts "Card #{card.number} created"
   end
   
-  def update
-    @flag_options.merge!({ :cp_owner_user_id => owner_id })
+  def fetch
     card_number = @options.first
-    card_to_update = card_by_number(card_number)
-    @flag_options.each do |attribute, value|
-      card_to_update.send("#{attribute.to_s}=".to_sym, value)
-    end
-    card_to_update.save
-    puts "Card #{card_to_update.number} updated\n\n"
-    card
+    Resources::Attachment.fetch(card_number, @config[:username], @config[:password])
   end
   
+  # TODO
   def move
     card_number = @options.first
     card_to_move = card_by_number(card_number)
@@ -107,16 +86,45 @@ class MinglrAction
     end
   end
   
+  # TODO
   def pickup
     raise "not implemented yet"
   end
   
+  def projects
+    Resources::Project.print_all(@options, @config[:status_property])
+  end
+  
+  # TODO
+  def update
+    @flag_options.merge!({ :cp_owner_user_id => owner_id })
+    card_number = @options.first
+    card_to_update = card_by_number(card_number)
+    @flag_options.each do |attribute, value|
+      card_to_update.send("#{attribute.to_s}=".to_sym, value)
+    end
+    card_to_update.save
+    puts "Card #{card_to_update.number} updated\n\n"
+    card
+  end
+  
+  def users
+    Resources::User.print_all(@options)
+  end
+  
   private
   
+  # TODO
+  def status_property
+    @config[:status_property].nil? ? nil : @config[:status_property].to_sym
+  end
+  
+  # TODO
   def card_by_number(number)
     Resources::Card.find(number)
   end
-  
+
+  # TODO  
   def owner_id
     Resources::User.find_user_id_for_user(@config[:username])
   end
