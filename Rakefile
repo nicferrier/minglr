@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'rake'
 
+task :default => [:test, :features]
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
@@ -45,8 +47,6 @@ rescue LoadError
   end
 end
 
-
-task :default => :test
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
