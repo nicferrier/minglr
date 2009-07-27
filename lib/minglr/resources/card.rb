@@ -7,7 +7,7 @@ module Resources
       card = self.new(options)
       if card.save
         card.reload
-        puts "Card #{card.number} created"
+        puts "Card ##{card.number} created"
       else
         warn "Unable to create card"
       end
@@ -17,7 +17,12 @@ module Resources
       if card_to_move = find(card_number)
         transition_options = { :card => card_number }
         transition_options.merge!({ :comment => options[:comment]}) if options[:comment]
-        current_status = card_to_move.send(config[:status_property]) if config[:status_property]
+        if config[:status_property]
+          current_status = card_to_move.send(config[:status_property])
+        else
+          warn "No known status of card ##{card_number}, cannot move!"
+          return
+        end
         next_transition = nil
         
         card_type = card_to_move.card_type_name.downcase
@@ -35,7 +40,8 @@ module Resources
             key.to_s =~ /^story_state/
           end
         else
-          puts "No transitions defined for card of type #{card_to_move.card_type_name}"  
+          warn "No transitions defined for card of type #{card_to_move.card_type_name}"
+          return
         end
         status_states = status_states.collect {|state| state.last }.collect {|state| state.split(">").collect { |value| value.strip } }
         next_transition = status_states.select {|state| state.first.downcase == current_status.downcase }.first.last
@@ -47,7 +53,7 @@ module Resources
           end
         end
       else
-        warn "No card #{card_number} found to move"
+        warn "No card ##{card_number} found to move"
       end
     end
     
@@ -64,7 +70,6 @@ module Resources
     end
     
     def self.print_card(card_number, status_property = nil)
-      attributes = [:number, :card_type_name, status_property, :name, :description].compact
       if card = find(card_number.to_i)
         puts card.to_s(status_property)
       else
@@ -78,10 +83,10 @@ module Resources
           card_to_update.send("#{attribute.to_s}=".to_sym, value)
         end
         card_to_update.save
-        puts "Card #{card_to_update.number} updated\n\n"
-        puts card.to_s
+        puts "Card ##{card_to_update.number} updated\n\n"
+        puts card_to_update.to_s
       else
-        warn "Unable to update card #{card_number}"
+        warn "Unable to update card ##{card_number}"
       end
     end
     
