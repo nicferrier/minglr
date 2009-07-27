@@ -12,7 +12,7 @@ module Minglr
       begin
         Commands.send(action, options, flag_options, config)
       rescue ActiveResource::ResourceNotFound => error
-        puts error.message + "for URL #{Resources::Base.site}..."
+        puts error.message + " for URL '#{Resources::Base.site}' ..."
       end
     end
   
@@ -34,7 +34,7 @@ module Minglr
 
       def self.card(options, flag_options, config)
         card_number = options.first
-        Resources::Card.print_card(options.first, config[:status_property])
+        Resources::Card.print_card(card_number, config[:status_property])
       end
   
       def self.cards(options, flag_options, config)

@@ -53,7 +53,7 @@ module Resources
     
     def self.print_all(options = [], status_property = nil)
       attributes = [:number, :card_type_name, status_property, :name].compact
-      cards = Resources::Card.find(:all)
+      cards = find(:all)
       cards.send(:extend, Minglr::Extensions::Array)
       cards = cards.filter(attributes, options)
       if cards.any?
@@ -65,7 +65,7 @@ module Resources
     
     def self.print_card(card_number, status_property = nil)
       attributes = [:number, :card_type_name, status_property, :name, :description].compact
-      if card = find(card_number)
+      if card = find(card_number.to_i)
         puts card.to_s(status_property)
       else
         warn "No card ##{card_number} found"
@@ -86,16 +86,21 @@ module Resources
     end
     
     def to_s(status_property = nil)
-      attachments = Resources::Attachment.find(:all, :params => { :card_number => number })
-      attachments = attachments.collect do |attachment|
-        "* #{attachment.file_name}: #{Resources::Base.site + attachment.url}"
+      attachments = []
+      begin
+        attachments = Attachment.find(:all, :params => { :card_number => number })
+        attachments = attachments.collect do |attachment|
+          "* #{attachment.file_name}: #{Resources::Base.site + attachment.url}"
+        end
+      rescue ActiveResource::ResourceNotFound => error
+        attachments = ["N/A"]
       end
       output = <<-EOS
      Number: #{number}
        Name: #{name}
-       Type: #{card_type_name}
-     Status: #{send(status_property) if status_property}
-Description: #{description}
+       Type: #{card_type_name.nil? ? "N/A" : card_type_name}
+     Status: #{send(status_property) if status_property && self.respond_to?(status_property)}
+Description: #{description.nil? ? "N/A" : description}
 
 Attachments:
   #{attachments.join("\n")}

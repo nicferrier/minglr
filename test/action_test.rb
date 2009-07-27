@@ -11,7 +11,6 @@ module Minglr
         should "return an array of valid actions" do
           valid_actions = ["users", "cards", "card", "move", "update", "attach", "projects", "create", "fetch"].sort
           assert_equal [], (valid_actions - Action.valid_actions)
-          #assert_equal valid_actions, Action.valid_actions.sort
         end
       
       end
@@ -61,7 +60,7 @@ module Minglr
         end
         
         should "rescue and print an error if the resource can't be found" do
-          Action.expects(:puts).with("Failed with MyError for URL #{Resources::Base.site}...")
+          Action.expects(:puts).with("Failed with MyError  for URL '#{Resources::Base.site}' ...")
           Minglr::Action::Commands.expects(:send).raises(ActiveResource::ResourceNotFound, stub("Response", :code => "MyError"))
           
           Action.execute("someaction", ["someaction"])

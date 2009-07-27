@@ -5,10 +5,9 @@ World(Test::Unit::Assertions)
 module Kernel
 
   def capture_stdout
-    out = StringIO.new
-    $stdout = out
+    $stdout = $cucumberout
     yield
-    return out
+    return $cucumberout
   ensure
     $stdout = STDOUT
   end
@@ -53,30 +52,18 @@ def rc_config
 end
 
 def execute_minglr_command(project, action, extra_arguments = [])
+  $cucumberout = StringIO.new
+  extra_arguments = [] if extra_arguments.nil?
   uri_options = rc_config[:global] || {}
-  project = rc_config[:global][:default].to_sym if rc_config[:global][:default]
-  original_arguments = [project, action] + extra_arguments
+  original_arguments = ([project, action] + extra_arguments)
   
-  uri_options.merge! rc_config[project]
+  uri_options.merge! rc_config[project.to_sym]
   Resources::Base.configure uri_options
   Resources::Attachment.configure
   extra_options = Minglr::OptionsParser.parse(original_arguments)
   
   output = capture_stdout do
-    Minglr::Action.execute(action, original_arguments, extra_options, rc_config[project])
+    Minglr::Action.execute(action, original_arguments, extra_options, rc_config[project.to_sym])
   end
   output.string.strip
-end
-
-Given /^the project "([^\"]*)"$/ do |project|
-  @project = project
-end
-
-When /^I issue the "([^\"]*)" action$/ do |action|
-  @action = action
-  @response = execute_minglr_command(@project, @action)
-end
-
-Then /^the result should have "([^\"]*)" in it$/ do |string|
-  assert @response.include?(string), "Expected #{@response.inspect} to contain '#{string}'"
 end
