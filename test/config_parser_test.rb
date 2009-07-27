@@ -8,7 +8,7 @@ module Minglr
     
       should "look for a config file in the user home directory or the current working directory" do
         File.expects(:exist?).with(File.join(ENV["HOME"], ".minglrconfig"))
-        File.expects(:exist?).with(File.expand_path(File.join(File.dirname(__FILE__), ".minglrconfig")))
+        File.expects(:exist?).with(File.expand_path(File.join(ENV["PWD"], ".minglrconfig")))
         ConfigParser.stubs(:puts)
         ConfigParser.parse
       end
