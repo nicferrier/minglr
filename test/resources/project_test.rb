@@ -18,6 +18,24 @@ module Resources
         end
       
       end
+      
+      context "print_all" do
+        
+        should "print list of all projects" do
+          project1 = Project.new
+          project2 = Project.new
+          Project.expects(:find).with(:all).returns([project1, project2])
+          Project.expects(:print_collection).with([project1, project2], [:name, :description])
+          Project.print_all          
+        end
+        
+        should "print warning if no projects are found" do
+          Project.expects(:find).with(:all).returns([])
+          Project.expects(:warn).with("No projects found")
+          Project.print_all
+        end
+      
+      end
     
     end
 
