@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
 
-task :default => [:test, :features]
+task :default => [:rcov, :features]
 
 begin
   require 'jeweler'
@@ -38,6 +38,7 @@ begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |test|
     test.libs << 'test'
+    test.rcov_opts = ['--exclude', 'gems', "--text-report", "--only-uncovered"]
     test.pattern = 'test/**/*_test.rb'
     test.verbose = true
   end
@@ -76,4 +77,4 @@ rescue LoadError
   end
 end
 
-task "ci" => ["test", "features", "gemspec", "build", "install"]
+task "ci" => ["rcov", "features", "gemspec", "build", "install"]
