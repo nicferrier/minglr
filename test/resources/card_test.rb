@@ -21,10 +21,13 @@ module Resources
       
       context "move" do
         
-        should "move card from one state to the next as defined" do
+        should_eventually "move card from one state to the next as defined" do
         end
         
         should "warn if card cannot be found" do
+          Card.expects(:find).with(0).returns(nil)
+          Card.expects(:warn).with("No card 0 found to move")
+          Card.move(0)
         end
         
       end
@@ -70,7 +73,10 @@ module Resources
         should_eventually "print out the details of the card after updating" do
         end
         
-        should_eventually "warn if it is not able to find the card" do
+        should "warn if it is not able to find the card" do
+          Card.expects(:find).with(0).returns(nil)
+          Card.expects(:warn).with("Unable to update card 0")
+          Card.update(0)
         end
         
       end
