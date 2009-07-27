@@ -1,3 +1,5 @@
+MINGLR_ENV = "test"
+
 require "rubygems"
 require "test/unit"
 begin

@@ -1,3 +1,5 @@
+MINGLR_ENV = "normal" unless defined?(MINGLR_ENV)
+
 require 'rubygems'
 require 'activesupport'
 require 'activeresource'
