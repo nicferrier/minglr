@@ -30,10 +30,23 @@ module Resources
       
       context "print_collection" do
         
-        should_eventually "print values of attributes of objects separated by dashes and aligning columns of values" do
+        setup do
+          @object1 = stub("Object", :name => "Foo", :description => "Bar")
+          @object2 = stub("Object", :name => "Bar", :description => "Frobble")
+          @collection = [@object1, @object2]
+          @attributes = [:name, :description]
         end
         
-        should_eventually "allow for right adjusted values" do
+        should "print values of attributes of objects separated by dashes and aligning columns of values" do
+          Base.expects(:puts).with("Foo - Bar    ")
+          Base.expects(:puts).with("Bar - Frobble")
+          Base.print_collection(@collection, @attributes)
+        end
+        
+        should "allow for right adjusted values" do
+          Base.expects(:puts).with("Foo -     Bar")
+          Base.expects(:puts).with("Bar - Frobble")
+          Base.print_collection(@collection, @attributes, :right)
         end
         
       end
