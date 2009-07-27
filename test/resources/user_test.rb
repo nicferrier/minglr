@@ -24,13 +24,6 @@ module Resources
         end
       
       end
-      
-      context "find_user_id_for_user" do
-        
-        should_eventually "return the owner_id of the user matching the username" do
-        end
-        
-      end
     
     end
 

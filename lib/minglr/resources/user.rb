@@ -14,12 +14,6 @@ module Resources
       end
     end
     
-    def self.find_user_id_for_user(user)
-      if user = Resources::User.find(:all).select { |user| user.user.login == user }.first
-        user.user_id
-      end
-    end
-    
   end
   
 end
