@@ -48,7 +48,6 @@ rescue LoadError
   end
 end
 
-
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   if File.exist?('VERSION.yml')

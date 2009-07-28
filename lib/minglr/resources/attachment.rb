@@ -1,4 +1,9 @@
-require 'httpclient'
+begin
+  require 'httpclient'
+rescue LoadError
+  puts "httpclient is not available. In order to run minglr, you must: sudo gem install cucumber"
+  exit 1
+end
 
 module Resources
   
