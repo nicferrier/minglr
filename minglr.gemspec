@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{minglr}
-  s.version = "1.3.2"
+  s.version = "1.3.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara"]
-  s.date = %q{2009-07-28}
+  s.date = %q{2009-08-04}
   s.description = %q{* This gem provides two executable binaries to interact with Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management) through its API. It also has sample interactive Rake task on how to facilitate easy card movements when a card enters/exits the development queue.  * mtx is a binary that facilities transition changes for use on rake tasks * minglr is a more interactive tool that provides a quick interface for many common uses}
   s.email = %q{michael@schubert.cx}
   s.executables = ["mtx", "minglr"]

@@ -1,9 +1,9 @@
-module Minglr
+ module Minglr
   
   class Action
   
     def self.execute(action, options = [], flag_options = {}, config = {})
-      if action == options[0].to_sym
+      if action.to_s == options[0]
         options.shift
       else
         options.shift
@@ -27,12 +27,16 @@ module Minglr
     class Commands
     
       def self.attach(options, flag_options, config)
+        raise "Missing card number!" if options.empty?
+        
         card_number = options.first
         file_name = flag_options[:file_attachment]
         Resources::Attachment.attach(card_number, file_name, config[:username], config[:password])
       end
 
       def self.card(options, flag_options, config)
+        raise "Missing card number!" if options.empty?
+        
         card_number = options.first
         Resources::Card.print_card(card_number, config[:status_property])
       end
@@ -46,11 +50,15 @@ module Minglr
       end
   
       def self.fetch(options, flag_options, config)
+        raise "Missing card number!" if options.empty?
+        
         card_number = options.first
         Resources::Attachment.fetch(card_number, config[:username], config[:password])
       end
   
       def self.move(options, flag_options, config)
+        raise "Missing card number!" if options.empty?
+        
         card_number = options.first
         Resources::Card.move(card_number, flag_options, config)
       end
@@ -60,6 +68,8 @@ module Minglr
       end
   
       def self.update(options, flag_options, config)
+        raise "Missing card number!" if options.empty?
+        
         card_number = options.first
         Resources::Card.update(card_number, flag_options)
       end
@@ -69,7 +79,7 @@ module Minglr
       end
     
     end
-
+    
   end
   
 end
