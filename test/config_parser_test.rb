@@ -7,9 +7,11 @@ module Minglr
     context "parse" do
     
       should "look for a config file in the user home directory or the current working directory" do
-        File.expects(:exist?).with(File.join(ENV["HOME"], ".minglrconfig"))
-        File.expects(:exist?).with(File.expand_path(File.join(ENV["PWD"], ".minglrconfig")))
-        ConfigParser.stubs(:puts)
+        File.expects(:exist?).with(File.join(ENV["HOME"], ".minglrconfig")).returns(true)
+        #File.expects(:exist?).with(File.expand_path(File.join(ENV["PWD"], ".minglrconfig"))).returns(false)
+        config_file_contents = ""
+        File.expects(:read).with(File.join(ENV["HOME"], ".minglrconfig")).returns(config_file_contents)
+        
         ConfigParser.parse
       end
       
@@ -30,6 +32,7 @@ module Minglr
       
       should "print a message if the config file cannot be found" do
         File.expects(:exist?).times(2).returns(false)
+        ConfigParser.expects(:class_eval).with("send :exit, 1")
         ConfigParser.expects(:puts)
         ConfigParser.parse
       end

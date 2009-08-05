@@ -14,7 +14,7 @@ module Minglr
         end
       end
       puts "Unable to find #{CONFIG_FILE} in #{config_files.join(", ")}"
-      exit 1
+      class_eval("send :exit, 1") # Why is it so hard to mock or stub exit?
     end
   
     def initialize(config_contents)
