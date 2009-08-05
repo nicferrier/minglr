@@ -1,4 +1,4 @@
- module Minglr
+module Minglr
   
   class Action
   

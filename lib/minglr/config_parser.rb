@@ -7,12 +7,14 @@ module Minglr
   
     def self.parse
       config_files = [File.join(ENV["HOME"], CONFIG_FILE), File.join(ENV["PWD"], CONFIG_FILE)]
+      config_files.uniq!
       config_files.each do |config_file_name|
         if File.exist?(config_file_name)
           return self.new(File.read(config_file_name)).config
         end
       end
       puts "Unable to find #{CONFIG_FILE} in #{config_files.join(", ")}"
+      exit 1
     end
   
     def initialize(config_contents)
