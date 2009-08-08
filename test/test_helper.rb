@@ -12,6 +12,7 @@ begin
 rescue LoadError
   puts "Missing mocha: sudo gem install mocha"
 end
+require "redgreen"
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 $LOAD_PATH.unshift(File.dirname(__FILE__))

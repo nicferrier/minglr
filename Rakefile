@@ -30,6 +30,7 @@ begin
     gem.add_development_dependency "mocha"
     gem.add_development_dependency "spicycode-rcov"
     gem.add_development_dependency "cucumber"
+    gem.add_development_dependency "redgreen"
     
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
