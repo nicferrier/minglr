@@ -21,6 +21,16 @@ begin
     gem.homepage = "http://github.com/schubert/minglr"
     gem.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara"]
     gem.executables = ["mtx", "minglr"]
+    
+    gem.add_dependency "httpclient"
+    gem.add_dependency "activeresource"
+    gem.add_dependency "activesupport"
+    
+    gem.add_development_dependency "thoughtbot-shoulda"
+    gem.add_development_dependency "mocha"
+    gem.add_development_dependency "spicycode-rcov"
+    gem.add_development_dependency "cucumber"
+    
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError

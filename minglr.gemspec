@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara"]
-  s.date = %q{2009-08-05}
+  s.date = %q{2009-08-08}
   s.description = %q{* This gem provides two executable binaries to interact with Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management) through its API. It also has sample interactive Rake task on how to facilitate easy card movements when a card enters/exits the development queue.  * mtx is a binary that facilities transition changes for use on rake tasks * minglr is a more interactive tool that provides a quick interface for many common uses}
   s.email = %q{michael@schubert.cx}
   s.executables = ["mtx", "minglr"]
@@ -60,12 +60,11 @@ Gem::Specification.new do |s|
      "test/resources/user_test.rb",
      "test/test_helper.rb"
   ]
-  s.has_rdoc = true
   s.homepage = %q{http://github.com/schubert/minglr}
   s.post_install_message = %q{PostInstall.txt}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.1}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{command line user tool for Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management)}
   s.test_files = [
     "test/action_test.rb",
@@ -84,11 +83,32 @@ Gem::Specification.new do |s|
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 2
+    s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<httpclient>, [">= 0"])
+      s.add_runtime_dependency(%q<activeresource>, [">= 0"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
+      s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_development_dependency(%q<mocha>, [">= 0"])
+      s.add_development_dependency(%q<spicycode-rcov>, [">= 0"])
+      s.add_development_dependency(%q<cucumber>, [">= 0"])
     else
+      s.add_dependency(%q<httpclient>, [">= 0"])
+      s.add_dependency(%q<activeresource>, [">= 0"])
+      s.add_dependency(%q<activesupport>, [">= 0"])
+      s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+      s.add_dependency(%q<mocha>, [">= 0"])
+      s.add_dependency(%q<spicycode-rcov>, [">= 0"])
+      s.add_dependency(%q<cucumber>, [">= 0"])
     end
   else
+    s.add_dependency(%q<httpclient>, [">= 0"])
+    s.add_dependency(%q<activeresource>, [">= 0"])
+    s.add_dependency(%q<activesupport>, [">= 0"])
+    s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
+    s.add_dependency(%q<mocha>, [">= 0"])
+    s.add_dependency(%q<spicycode-rcov>, [">= 0"])
+    s.add_dependency(%q<cucumber>, [">= 0"])
   end
 end
