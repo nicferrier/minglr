@@ -1,18 +1,8 @@
 MINGLR_ENV = "normal" unless defined?(MINGLR_ENV)
 
 require 'rubygems'
-begin
-  require 'activesupport'
-rescue LoadError
-  puts "activesupport is not available. In order to run minglr, you must: sudo gem install activesupport"
-  exit 1
-end
-begin
-  require 'activeresource'
-rescue LoadError
-  puts "activeresource is not available. In order to run minglr, you must: sudo gem install activeresource"
-  exit 1
-end
+require 'activesupport'
+require 'activeresource'
 require 'optparse'
 
 prefix = File.join(File.dirname(__FILE__), "minglr")
