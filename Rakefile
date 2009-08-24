@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
 
-task :default => [:rcov, :features]
+task :default => [:rcov]
 
 begin
   require 'jeweler'
