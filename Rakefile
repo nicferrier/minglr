@@ -28,7 +28,7 @@ begin
     
     gem.add_development_dependency "thoughtbot-shoulda"
     gem.add_development_dependency "mocha"
-    gem.add_development_dependency "spicycode-rcov"
+    gem.add_development_dependency "relevance-rcov"
     gem.add_development_dependency "cucumber"
     gem.add_development_dependency "redgreen"
     
@@ -49,13 +49,13 @@ begin
   require 'rcov/rcovtask'
   Rcov::RcovTask.new do |test|
     test.libs << 'test'
-    test.rcov_opts = ['--exclude', 'gems', "--text-report", "--only-uncovered"]
+    test.rcov_opts = ['--exclude', 'gems,/System/Library/Frameworks/Ruby.framework/', "--text-report", "--only-uncovered"]
     test.pattern = 'test/**/*_test.rb'
     test.verbose = true
   end
 rescue LoadError
   task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
+    abort "RCov is not available. In order to run rcov, you must: sudo gem install relevance-rcov"
   end
 end
 
