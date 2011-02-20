@@ -1,8 +1,8 @@
 MINGLR_ENV = "normal" unless defined?(MINGLR_ENV)
 
 require 'rubygems'
-require 'activeresource'
-require 'activesupport'
+require 'active_resource'
+require 'active_support'
 require 'optparse'
 
 prefix = File.join(File.dirname(__FILE__), "minglr")

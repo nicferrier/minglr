@@ -24,8 +24,8 @@ begin
     gem.executables = ["mtx", "minglr"]
     
     gem.add_dependency "httpclient"
-    gem.add_dependency "activeresource", ">= 2.3.0"
-    gem.add_dependency "activesupport", ">= 2.3.0"
+    gem.add_dependency "active_resource", ">= 2.3.0"
+    gem.add_dependency "active_support", ">= 2.3.0"
     
     gem.add_development_dependency "thoughtbot-shoulda"
     gem.add_development_dependency "mocha"
