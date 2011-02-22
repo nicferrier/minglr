@@ -1,6 +1,6 @@
 = minglr
 
-* http://github.com/schubert/minglr/tree/master
+* https://github.com/juanibiapina/minglr
 
 == DESCRIPTION:
 
@@ -71,11 +71,12 @@ Minglr can be used regardless your application is a Ruby on Rails web applicatio
 
 == INSTALL:
 
-* sudo gem install schubert-minglr -s http://gems.github.com
+* sudo gem install minglr
 
-* Enable Mingle API basic authentication in auth_config.yml, then restart it.
+* Enable Mingle API basic authentication in auth_config.yml, then restart it. (this is in your local install of Mingle)
 
 * Preferably install rb-password (http://www.caliban.org/ruby/ruby-password.shtml), through Macports (sudo port install rb-password)
+
 * Copy over the "path-to-minglr/tasks/*.sample.rake" files and start customizing for your check-in needs.
 
 == CREDITS:

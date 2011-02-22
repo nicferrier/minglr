@@ -1,11 +1,11 @@
 [global]
-	default = someproject
-	username = yourusername
+	default = sandbox
+	username = lgoldste
 	
 [someproject]
-	url = http://your.mingle.host.com/mingle/projects/someproject
-	username = yourusername
-	password = YOURMINGLEPASSWORD
+	url = https://sandbox.mingle.thoughtworks.com/
+	username = 
+	password = 
 	delete_property = cp_story_status
 	delete_state = Deleted
 	status_property = cp_story_status
