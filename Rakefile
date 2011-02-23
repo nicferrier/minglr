@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'yaml'
 
-task :default => [:rcov]
+task :default => [:ci]
 
 begin
   require 'jeweler'
@@ -88,4 +88,4 @@ rescue LoadError
   end
 end
 
-task "ci" => ["rcov", "features", "gemspec", "build", "install"]
+task "ci" => ["rcov", "features", "gemspec", "build"]
