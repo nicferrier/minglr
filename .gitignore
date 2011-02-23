@@ -1,5 +1,6 @@
 *.swp
 *.gem
+*.gemspec
 pkg/*
 coverage/*
 .DS_Store
