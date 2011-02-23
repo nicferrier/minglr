@@ -42,7 +42,7 @@ module Minglr
     def define_var(line)
       key, value = line.split("=")
       key.strip!
-      value.strip!
+      value.strip! unless value.nil?
       @config[@current_section][key.to_sym] = value
     end
   
