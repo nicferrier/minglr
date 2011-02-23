@@ -18,14 +18,14 @@ begin
     gem.name = "minglr"
     gem.summary = %q{command line user tool for Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management)}
     gem.description = %q{* This gem provides two executable binaries to interact with Mingle (http://mingle.thoughtworks.com/mingle-agile-project-management) through its API. It also has sample interactive Rake task on how to facilitate easy card movements when a card enters/exits the development queue.  * mtx is a binary that facilities transition changes for use on rake tasks * minglr is a more interactive tool that provides a quick interface for many common uses}
-    gem.email = "michael@schubert.cx"
-    gem.homepage = "http://github.com/schubert/minglr"
-    gem.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara"]
+    gem.email = "jibiapin@thoughtworks.com"
+    gem.homepage = "https://github.com/juanibiapina/minglr"
+    gem.authors = ["Michael Schubert", "Stephen Chu", "Chris O'Meara", "TWUXX"]
     gem.executables = ["mtx", "minglr"]
     
     gem.add_dependency "httpclient"
-    gem.add_dependency "active_resource", ">= 2.3.0"
-    gem.add_dependency "active_support", ">= 2.3.0"
+    gem.add_dependency "active_resource" #, ">= 2.3.0"
+    gem.add_dependency "active_support" #, ">= 2.3.0"
     
     gem.add_development_dependency "thoughtbot-shoulda"
     gem.add_development_dependency "mocha"
