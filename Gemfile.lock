@@ -1,7 +1,18 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activemodel (3.0.4)
+      activesupport (= 3.0.4)
+      builder (~> 2.1.2)
+      i18n (~> 0.4)
+    activeresource (3.0.4)
+      activemodel (= 3.0.4)
+      activesupport (= 3.0.4)
+    activesupport (3.0.4)
+    builder (2.1.2)
     git (1.2.5)
+    httpclient (2.1.6.1)
+    i18n (0.5.0)
     jeweler (1.5.2)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
@@ -13,5 +24,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activeresource
+  httpclient
   jeweler
   rcov
