@@ -1,3 +1,4 @@
 source "http://rubygems.org"
-gem "nokogiri"
-gem "minglr"
+
+gem 'jeweler'
+gem 'rcov'
