@@ -17,7 +17,7 @@ module Minglr
         Resources::Base.site = "http://foo.bar"
         Resources::PropertyDefinition.expects(:project_options).raises(ActiveResource::UnauthorizedAccess, stub(:code => "BadAccess"))
         OptionsParser.expects(:puts).at_least(1)
-        OptionsParser.expects(:puts).with("Connection Failed with BadAccess  to http://foo.bar")
+        OptionsParser.expects(:puts).with("Connection Failed.  Response code = BadAccess. to http://foo.bar")
         OptionsParser.expects(:puts).with("Did you set 'basic_authentication_enabled: true' in your auth_config.yml file?")
         OptionsParser.parse(["--version"])
       end

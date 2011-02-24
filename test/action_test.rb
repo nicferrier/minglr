@@ -60,7 +60,7 @@ module Minglr
         end
         
         should "rescue and print an error if the resource can't be found" do
-          Action.expects(:puts).with("Failed with MyError  for URL '#{Resources::Base.site}' ...")
+          Action.expects(:puts).with("Failed.  Response code = MyError. for URL '#{Resources::Base.site}' ...")
           Minglr::Action::Commands.expects(:send).raises(ActiveResource::ResourceNotFound, stub("Response", :code => "MyError"))
           
           Action.execute("someaction", ["someaction"])
