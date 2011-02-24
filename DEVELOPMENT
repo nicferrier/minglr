@@ -1,0 +1,20 @@
+= Ubuntu 10.10
+
+== Dependencies
+
+* Ruby
+	sudo apt-get install ruby ruby-dev
+
+* Bundler
+	sudo gem install bundler
+
+== Setting up the enviroment
+
+* Make sure GEM_HOME points to the gems directory (usually /var/lib/gems/1.8)
+	export GEM_HOME="/var/lib/gems/1.8/"
+
+* Make sure GEM_HOME/bin is in your path
+	export PATH=/var/lib/gems/1.8/bin:$PATH
+
+* Run bundler in the minglr root directory
+	bundle install
