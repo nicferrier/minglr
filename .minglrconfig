@@ -1,0 +1,39 @@
+
+[global]
+	default = scrum_demo
+	#username = 
+	
+[scrum_demo]
+	url = https://sandbox.mingle.thoughtworks.com/api/v2/projects/scrum_demo
+	#username = 
+	#password = 
+	#delete_property = cp_story_status
+	#delete_state = Deleted
+	#status_property = cp_story_status
+	#story_state_1 = Ready For Development > Sign Up for Story
+	#story_state_2 = Dev In Progress > Dev Complete
+	#task_state_1 = New > New to ready for Dev for Task
+	#task_state_2 = Ready for Development > Dev in Progress
+	#task_state_3 = Dev In Progress > Story from Dev in Progress to Dev Complete
+	#story_checkout = story_state_1
+	#task_checkout = story_state_2
+
+# Mingle Project Templates
+# [blank]
+# 	url = http://localhost:9090/projects/blank
+# 
+# [agilehybrid]
+# 	url = http://localhost:9090/projects/agilehybrid
+# 	status_property = cp_status
+# 
+# [scrum]
+# 	url = http://localhost:9090/projects/scrum
+# 	status_property = cp_status
+# 
+# [storytracker]
+# 	url = http://localhost:9090/projects/storytracker
+# 	status_property = cp_status
+# 
+# [xp]
+# 	url = http://localhost:9090/projects/xp
+

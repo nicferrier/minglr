@@ -60,7 +60,7 @@ module Resources
     
     def self.print_all(options = [], status_property = nil)
       attributes = [:number, :card_type_name, status_property, :name].compact
-      cards = find(:all, :from => '/api/v2/projects/scrum_demo/cards.xml')
+      cards = find(:all)
       cards.send(:extend, Minglr::Extensions::Array)
       cards = cards.filter(attributes, options)
       if cards.any?
