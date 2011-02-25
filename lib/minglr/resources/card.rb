@@ -1,6 +1,7 @@
 module Resources
   
   class Card < Base
+    attr_reader :card_type_name
     
     def self.create(options = {}, status_property = nil)
       options.merge!({status_property.to_sym => "New"}) if status_property
@@ -12,7 +13,7 @@ module Resources
         warn "Unable to create card"
       end
     end
-    
+
     def self.move(card_number, options = {}, config = {})
       if card_to_move = find(card_number)
         transition_options = { :card => card_number }
@@ -59,7 +60,7 @@ module Resources
     
     def self.print_all(options = [], status_property = nil)
       attributes = [:number, :card_type_name, status_property, :name].compact
-      cards = find(:all)
+      cards = find(:all, :from => '/api/v2/projects/scrum_demo/cards.xml')
       cards.send(:extend, Minglr::Extensions::Array)
       cards = cards.filter(attributes, options)
       if cards.any?

@@ -6,8 +6,8 @@ module Resources
     
     def self.configure(uri_options)
       uri = URI.parse(uri_options[:url])
-      uri.user = uri_options[:username]
-      uri.password = uri_options[:password]
+      uri.user = nil #uri_options[:username]
+      uri.password = nil #uri_options[:password]
       self.site = uri
     end
 
