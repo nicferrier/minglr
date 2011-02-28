@@ -16,38 +16,16 @@ end
 
 def rc_config
   { 
-    :scrum => {
-      :url              => "http://localhost:9090/projects/scrum",
-      :password         => "mingle",
-      :status_property  => "cp_status",
-      :username         => "schubert"
-    }, 
     :global => {
       :default          => "blank",
-      :username         => "schubert"
+      :username         => "test_user"
     },
-    :storytracker => {
-      :url              => "http://localhost:9090/projects/storytracker",
-      :password         => "mingle",
+    :sample_project => {
+      :url              => "http://192.168.56.101:8080/projects/sample_project/",
+      :password         => "test_password",
       :status_property  => "cp_status",
-      :username         => "schubert"
-    },
-    :xp => {
-      :url => "http://localhost:9090/projects/xp",
-      :password => "mingle",
-      :username => "schubert"
-    },
-    :blank => {
-      :url => "http://localhost:9090/projects/blank",
-      :password => "mingle",
-      :username => "schubert"
-    },
-    :agilehybrid => {
-      :url => "http://localhost:9090/projects/agilehybrid",
-      :password => "mingle",
-      :status_property => "cp_status",
-      :username=>"schubert"
-    }
+      :username         => "test_user"
+    } 
   }
 end
 

@@ -1,10 +1,10 @@
 Feature: Cards
   
   Scenario: Print list of cards in the project
-    Given the project "xp"
+    Given the project "sample_project"
     When I issue the "cards" action
-    Then the result should have "119 - Task      - Build PDF Export Widget on UI" in it
-    And the result should have "105 - Epic      - Find people, projects and documents" in it
+    Then the result should have "115 -  - Release 4" in it
+    And the result should have "114 -  - History Updates" in it
 
   Scenario: Print list of cards in the project with a filter
     Given the project "xp"
