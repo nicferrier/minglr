@@ -10,10 +10,11 @@
 * minglr is a more interactive tool that provides a quick interface for many common uses
 
 == MINGLR FEATURES:
-* lists cards
+* lists cards <<"END"
 	$ minglr cards
 	266 - Task   - Development Complete  - Investigate new tool
 	265 - Defect - New                   - The background is the wrong color
+END
 
 * list users
 	$ minglr users
