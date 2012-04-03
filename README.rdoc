@@ -10,31 +10,31 @@
 * minglr is a more interactive tool that provides a quick interface for many common uses
 
 == MINGLR FEATURES:
-* lists cards
+* lists cards <<"END"
 	$ minglr cards
 	266 - Task   - Development Complete  - Investigate new tool
 	265 - Defect - New                   - The background is the wrong color
-
-* list users
+END
+* list users <<"END"
 	$ minglr users
 	schubert - Michael Schubert - michael@yourcompany.com
-
-* list all cards with the word "foo"
+END
+* list all cards with the word "foo" <<"END"
 	$ minglr cards foo
-
-* list details for card 215
+END
+* list details for card 215 <<"END"
 	$ minglr card 215
 	     Number: 215
 	       Name: Add the frobble to the bobble
 	       Type: Story
 	     Status: In Development
 	Description: Lorem Ipsum
-
-* create new story card
+END
+* create new story card <<"END"
 	$ minglr create -t Story -n "My New Story" -d "Story Description"
 	Created story card 271
-
-* update a card
+END
+* update a card <<"END"
 	$ minglr update 271 -d "Bettter Description"
 	Card 271 updated
 
@@ -43,11 +43,11 @@
 	       Type: Task
 	     Status: Ready for Development
 	Description: Better Description
-
-* move card based on defined transitions
+END
+* move card based on defined transitions <<END
 	$ minglr move 266 -c "All done with development"
 	Moved card from In Development to Dev Complete
-
+END
 == MTX FEATURES:
 
 * Executes a card transition through the Mingle API.
